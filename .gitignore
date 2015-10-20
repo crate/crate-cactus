@@ -1,0 +1,10 @@
+bin/
+parts/
+develop-eggs/
+.installed.cfg
+dist/
+build/
+out/
+*.pyc
+*.DS_Store
+.coverage
