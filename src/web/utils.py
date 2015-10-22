@@ -43,15 +43,15 @@ logger = logging.getLogger(__name__)
 HEADER_RE = r'(\w+)\:\s([\S\s]*)\n'
 
 
-def toDict(conf, posts):
-    site = conf.get('site', '')
+def toDict(settings, posts):
+    host = settings.get('site', '')
     return [dict(
         id = hashlib.md5(x['url'].encode()).hexdigest(),
         title = x['title'],
         date = x['date'],
         tags = x['tags'],
         category = x['category'],
-        permalink = '{0}{1}'.format(site, x['url']),
+        permalink = '{0}{1}'.format(host, x['url']),
         content = u'',
         excerpt = Truncator(strip_tags(markdown(force_text(x['raw_body']), safe_mode=True))).words(25),
         author = x['author'],
