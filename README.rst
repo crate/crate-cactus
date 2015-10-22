@@ -22,13 +22,6 @@ The dev environment requires Python 2.7 to be installed::
     $ python2.7 bootstrap.py
     $ bin/buildout -N
 
-Select an environment::
-
-    $ bin/env local
-
-Other options are: ``staging`` and ``production``.
-
-
 To start the development server::
 
     $ bin/serve
@@ -61,11 +54,20 @@ Deploy Staging
 
 Run the `deploy_web-staging`_ job on Jenkins.
 
+You can build manually using ``buildout-production.cfg``::
+
+    $ bin/buildout -c buildout-production.cfg
+    $ bin/cactus build --path site --conf config/staging.json
+
 Deploy Production
 -----------------
 
 Run the `deploy_web-production`_ job on Jenkins.
 
+You can build manually using ``buildout-production.cfg``::
+
+    $ bin/buildout -c buildout-production.cfg
+    $ bin/cactus build --path site --conf config/production.json
 
 
 .. _`crate.io`: https://crate.io

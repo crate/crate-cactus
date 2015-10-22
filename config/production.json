@@ -1,4 +1,7 @@
 {
+  "prettify": true,
+  "fingerprint": ["css", "js"],
+  "optimize": [],
   "site": "https://crate.io",
   "robots": true,
   "id_segment": "vd4x4hv637",
