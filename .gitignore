@@ -4,7 +4,8 @@ develop-eggs/
 .installed.cfg
 dist/
 build/
+.build/
 out/
 *.pyc
 *.DS_Store
-.coverage
+*.egg-info/
