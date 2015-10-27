@@ -22,67 +22,97 @@
 
 __docformat__ = "reStructuredText"
 
+import os
 import sys
 import time
-import os
+import logging
+
+from PIL import Image
+from argparse import ArgumentParser
+from colorlog import ColoredFormatter
 from watchdog.observers import Observer
 from watchdog.events import RegexMatchingEventHandler
-from PIL import Image
+
+
+logging.basicConfig()
+logger = logging.getLogger('resize')
+logger.setLevel(logging.DEBUG)
+
 
 class ImageProcessor():
-    
+
+    sizes = [1024, 800, 600, 200]
+
     def __init__(self, inputFile):
         self.filepath = os.path.abspath(inputFile)
         self.dirname = os.path.dirname(self.filepath)
         self.filename = os.path.splitext(os.path.basename(self.filepath))[0]
-        self.fileExt = os.path.splitext(inputFile)[1]
-    
-    def resize(self, width, height):
+        self.file_ext = os.path.splitext(inputFile)[1]
+
+    def _out_file_path(self, size):
+        return os.path.join(self.dirname,
+                            '{0}_{1}{2}'.format(self.filename,
+                                                str(size),
+                                                self.file_ext))
+
+    def resize(self):
+        for size in self.sizes:
+            self._resize(size)
+
+    def _resize(self, size):
+        logger.debug('Resizing image {0} to {1}px ...'.format(self.filepath, size))
         try:
-            im = Image.open(self.filepath)
+            img = Image.open(self.filepath)
             # max-width, max-height
-            im.thumbnail((width, height))
-            outfile = '{0}/{1}_{2}{3}'.format(self.dirname, self.filename, str(im.size[0]), self.fileExt)
-            im.save(outfile)
+            img.thumbnail((size, size))
+            img.save(self._out_file_path(size))
         except IOError:
-            print("cannot convert", self.filepath)
+            logger.error("Could not convert file {0}".format(self.filepath))
+
 
 class FileHandler(RegexMatchingEventHandler):
 
     def process(self, event):
         image = ImageProcessor(event.src_path)
-        image.resize(800, 800)
-        image.resize(600, 600)
-        image.resize(200, 200)
-    
+        image.resize()
+
     def on_modified(self, event):
         self.process(event)
-    
+
     def on_created(self, event):
         self.process(event)
 
 
+def parse_args():
+    pwd = os.path.abspath(os.path.join(os.getcwd(), 'site'))
+    parser = ArgumentParser(description='Image resize daemon')
+    parser.add_argument('-d', '--dir', type=str, default=pwd,
+                        help='directory to watch')
+    return parser.parse_args()
+
+
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else '.'
+    _ = parse_args()
     observer = Observer()
-    
-    fileExts = ["jpg", "jpeg", "png", "tif", "tiff", "gif"]
+
+    image_ext = ["jpg", "jpeg", "png", "tif", "tiff", "gif"]
     regexes = []
-        
-    for ext in fileExts:
+
+    for ext in image_ext:
         regexes.append(".*." + ext)
-    
+
     ignore_regexes = [".*(_[0-9]+).(.+)"]
-    
-    observer.schedule(FileHandler(regexes=regexes, ignore_regexes=ignore_regexes), path, recursive=True)
+
+    observer.schedule(FileHandler(regexes=regexes, ignore_regexes=ignore_regexes),
+                      _.dir, recursive=True)
     observer.start()
+    logger.info('Watching for images in directory {0}'.format(_.dir))
+
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
-        
+
     observer.join()
 
-if __name__ == '__main__':
-    main()
