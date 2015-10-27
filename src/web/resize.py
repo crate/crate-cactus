@@ -22,8 +22,67 @@
 
 __docformat__ = "reStructuredText"
 
+import sys
+import time
+import os
+from watchdog.observers import Observer
+from watchdog.events import RegexMatchingEventHandler
 from PIL import Image
 
-def main():
-    raise NotImplementedError('Image resizing is not implemented yet')
+class ImageProcessor():
+    
+    def __init__(self, inputFile):
+        self.filepath = os.path.abspath(inputFile)
+        self.dirname = os.path.dirname(self.filepath)
+        self.filename = os.path.splitext(os.path.basename(self.filepath))[0]
+        self.fileExt = os.path.splitext(inputFile)[1]
+    
+    def resize(self, width, height):
+        try:
+            im = Image.open(self.filepath)
+            # max-width, max-height
+            im.thumbnail((width, height))
+            outfile = '{0}/{1}_{2}{3}'.format(self.dirname, self.filename, str(im.size[0]), self.fileExt)
+            im.save(outfile)
+        except IOError:
+            print("cannot convert", self.filepath)
 
+class FileHandler(RegexMatchingEventHandler):
+
+    def process(self, event):
+        image = ImageProcessor(event.src_path)
+        image.resize(800, 800)
+        image.resize(600, 600)
+        image.resize(200, 200)
+    
+    def on_modified(self, event):
+        self.process(event)
+    
+    def on_created(self, event):
+        self.process(event)
+
+
+def main():
+    path = sys.argv[1] if len(sys.argv) > 1 else '.'
+    observer = Observer()
+    
+    fileExts = ["jpg", "jpeg", "png", "tif", "tiff", "gif"]
+    regexes = []
+        
+    for ext in fileExts:
+        regexes.append(".*." + ext)
+    
+    ignore_regexes = [".*(_[0-9]+).(.+)"]
+    
+    observer.schedule(FileHandler(regexes=regexes, ignore_regexes=ignore_regexes), path, recursive=True)
+    observer.start()
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+        
+    observer.join()
+
+if __name__ == '__main__':
+    main()

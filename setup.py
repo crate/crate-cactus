@@ -32,6 +32,7 @@ requirements = [
     'Cactus==3.3.2p1',
     'Pillow',
     'cdn-fastly',
+    'watchdog'
 ]
 
 if (2, 6) == sys.version_info[:2]:
