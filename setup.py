@@ -31,8 +31,8 @@ requirements = [
     'setuptools',
     'Cactus==3.3.2p1',
     'Pillow',
-    'cdn-fastly',
-    'watchdog'
+#    'cdn-fastly',
+    'watchdog',
 ]
 
 if (2, 6) == sys.version_info[:2]:
@@ -60,7 +60,9 @@ setup(
     namespace_packages=[],
     entry_points={
         'console_scripts': [
+#            'cactus=cactus.cli:cli_entrypoint',
             'resize_images=web.resize:main',
+            'run=web.gui:main',
         ]
     },
     extras_require=dict(
