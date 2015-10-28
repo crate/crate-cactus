@@ -29,7 +29,7 @@ from django.utils.safestring import mark_safe
 
 register = Library()
 
-CDN_URL = 'https://cdn.crate.io'
+CDN_URL = 'https://crate.io'
 
 def media(context, media_url):
     """
