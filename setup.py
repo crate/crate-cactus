@@ -27,13 +27,16 @@ import re
 import sys
 from setuptools import setup, find_packages
 
+root_dir = os.path.dirname(__file__)
+
 requirements = [
     'setuptools',
-    'Cactus==3.3.2p1',
     'Pillow',
-    'cdn-fastly',
-    'watchdog'
+    'watchdog',
 ]
+
+with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
+    requirements += fp.readlines()
 
 if (2, 6) == sys.version_info[:2]:
     requirements.append('argparse>=1.1')
@@ -47,24 +50,28 @@ setup(
     url='https://github.com/crate/crate-cactus',
     author='CRATE Technology GmbH',
     author_email='office@crate.io',
-    package_dir={'': 'src'},
-    description='Crate Cactus',
+    package_dir={'': 'src', 'cactus': 'cactus/cactus'},
+    description='Cactus Website Deploy Tool',
     long_description=read('README.rst'),
     platforms=['any'],
     license='Apache License 2.0',
     keywords='',
-    packages=find_packages('src'),
+    packages=find_packages('src') + find_packages('cactus'),
     dependency_links=[
       'http://download.crate.io/eggs/',
     ],
     namespace_packages=[],
     entry_points={
         'console_scripts': [
+            'cactus=cactus.cli:cli_entrypoint',
             'resize_images=web.resize:main',
+            'cactus_gui=web.gui:main',
         ]
     },
     extras_require=dict(
         argcompletion=['argcomplete']
     ),
-    install_requires=requirements
+    install_requires=requirements,
+    app=[os.path.join('src','web','gui.py')],
+    data_files=[],
 )
