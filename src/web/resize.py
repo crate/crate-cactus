@@ -83,16 +83,16 @@ class FileHandler(RegexMatchingEventHandler):
         self.process(event)
 
 
-def parse_args():
+def parse_args(args):
     pwd = os.path.abspath(os.path.join(os.getcwd(), 'site'))
     parser = ArgumentParser(description='Image resize daemon')
     parser.add_argument('-d', '--dir', type=str, default=pwd,
                         help='directory to watch')
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
-def main():
-    _ = parse_args()
+def resize(args):
+    _ = parse_args(args)
     observer = Observer()
 
     image_ext = ["jpg", "jpeg", "png", "tif", "tiff", "gif"]
@@ -115,4 +115,8 @@ def main():
         observer.stop()
 
     observer.join()
+
+
+def main():
+    resize(sys.argv[1:])
 
