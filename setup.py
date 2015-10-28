@@ -30,6 +30,7 @@ from setuptools import setup, find_packages
 root_dir = os.path.dirname(__file__)
 
 requirements = [
+    'setuptools',
     'Pillow',
     'watchdog',
 ]
@@ -42,6 +43,7 @@ if (2, 6) == sys.version_info[:2]:
 
 def read(path):
     return open(os.path.join(os.path.dirname(__file__), path)).read()
+
 
 setup(
     name='crate-cactus',
@@ -64,12 +66,20 @@ setup(
         'console_scripts': [
             'cactus=cactus.cli:cli_entrypoint',
             'resize_images=web.resize:main',
-            'run=web.gui:main',
+            'cactus_gui=web.gui:main',
         ]
     },
     extras_require=dict(
         argcompletion=['argcomplete']
     ),
     install_requires=requirements,
+    setup_requires=['py2app'],
     app=[os.path.join('src','web','gui.py')],
+    data_files=[],
+    options={
+        'py2app': {
+            'argv_emulation': True,
+            'packages': ['six.moves','html'],
+        }
+    }
 )
