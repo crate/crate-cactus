@@ -50,7 +50,7 @@ setup(
     author='CRATE Technology GmbH',
     author_email='office@crate.io',
     package_dir={'': 'src', 'cactus': 'cactus/cactus'},
-    description='Crate Cactus',
+    description='Cactus Website Deploy Tool',
     long_description=read('README.rst'),
     platforms=['any'],
     license='Apache License 2.0',
