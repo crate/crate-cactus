@@ -135,3 +135,4 @@ def resize(args):
 
 def main():
     resize(sys.argv[1:])
+

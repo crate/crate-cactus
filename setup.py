@@ -21,11 +21,12 @@
 # software solely pursuant to the terms of the relevant commercial agreement.
 
 __docformat__ = "reStructuredText"
+__version__ = (0, 1, 0)
 
 import os
-import re
 import sys
 from setuptools import setup, find_packages
+
 
 root_dir = os.path.dirname(__file__)
 
@@ -36,42 +37,64 @@ requirements = [
 ]
 
 with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
-    requirements += fp.readlines()
-
-if (2, 6) == sys.version_info[:2]:
-    requirements.append('argparse>=1.1')
+    requirements += [l.rstrip('\n') for l in fp.readlines()]
 
 def read(path):
     return open(os.path.join(os.path.dirname(__file__), path)).read()
 
-setup(
-    name='crate-cactus',
-    version='0.1.0',
-    url='https://github.com/crate/crate-cactus',
-    author='CRATE Technology GmbH',
-    author_email='office@crate.io',
-    package_dir={'': 'src', 'cactus': 'cactus/cactus'},
-    description='Cactus Website Deploy Tool',
-    long_description=read('README.rst'),
-    platforms=['any'],
-    license='Apache License 2.0',
-    keywords='',
-    packages=find_packages('src') + find_packages('cactus'),
-    dependency_links=[
-      'http://download.crate.io/eggs/',
-    ],
-    namespace_packages=[],
-    entry_points={
+kwargs = dict(
+    name = 'crate-cactus',
+    version = '.'.join([str(x) for x in __version__]),
+    url = 'https://github.com/crate/crate-cactus',
+    author = 'CRATE Technology GmbH',
+    author_email = 'office@crate.io',
+    package_dir = {'': 'src', 'cactus': 'cactus/cactus'},
+    description = 'Cactus Website Deploy Tool',
+    long_description = read('README.rst'),
+    platforms = ['any'],
+    license = 'Apache License 2.0',
+    packages = find_packages('src') + find_packages('cactus'),
+    namespace_packages = [],
+    entry_points = {
         'console_scripts': [
             'cactus=cactus.cli:cli_entrypoint',
             'resize_images=web.resize:main',
             'cactus_gui=web.gui:main',
         ]
     },
-    extras_require=dict(
-        argcompletion=['argcomplete']
-    ),
-    install_requires=requirements,
-    app=[os.path.join('src','web','gui.py')],
-    data_files=[],
+    install_requires = requirements,
+    setup_requires = ["py2app"],
 )
+
+try:
+    import py2app
+except ImportError:
+    # py2app is not present
+    # GUI cannot be built as standalone application
+    pass
+else:
+    kwargs.update(dict(
+        options = dict(
+            py2app = dict(
+                iconfile = os.path.join('resources', 'Icons.icns'),
+                plist = os.path.join('resources', 'Info.plist'),
+                # fix dynamic imports
+                packages = [
+                    'web',
+                    'cactus',
+                    'django',
+                    'django_markwhat',
+                    'keyring',
+                ],
+                argv_emulation = 1,
+            ),
+        ),
+        app = [
+            os.path.join('src','web','gui.py'),
+        ],
+    ))
+    from pprint import pprint
+    pprint(kwargs)
+
+setup(**kwargs)
+

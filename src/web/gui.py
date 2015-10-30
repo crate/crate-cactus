@@ -22,7 +22,15 @@
 
 import os
 import sys
+import time
 import logging
+import subprocess
+import urllib.request
+from logging.handlers import SysLogHandler
+from multiprocessing import Process, Pipe, freeze_support
+
+from cactus.cli import main as cmd_cactus
+from web.resize import resize as cmd_resize
 
 # ensure Python 2 compatibility
 set_start_method = lambda x: None
@@ -30,24 +38,32 @@ set_start_method = lambda x: None
 if (3, 0) <= sys.version_info[:2]:
     import tkinter as tk
     from tkinter import filedialog
+    from tkinter import messagebox
     from multiprocessing import set_start_method
 else:
     import Tkinter as tk
     try:
         from Tkinter import filedialog
+        from Tkinter import messagebox
     except ImportError:
         import tkFileDialog as filedialog
-
-from multiprocessing import Process, freeze_support
-from web.resize import resize as cmd_resize
-from cactus.cli import main as cmd_cactus
+        import tkMessageBox as messagebox
 
 
-class WebserverProcess(Process):
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+LOGGER.addHandler(SysLogHandler('/var/run/syslog'))
 
-    def __init__(self, site_path):
-        super(WebserverProcess, self).__init__(name='Webserver')
+
+class BackgroundProcess(Process):
+
+    def __init__(self, site_path, *args, **kwargs):
+        super(BackgroundProcess, self).__init__(*args, **kwargs)
         self.site_path = site_path
+        self.daemon = True
+
+
+class WebserverProcess(BackgroundProcess):
 
     def run(self, *args):
         cmd_cactus(['serve',
@@ -56,11 +72,7 @@ class WebserverProcess(Process):
                     '--config', os.path.join(self.site_path, 'config.json')])
 
 
-class ResizeProcess(Process):
-
-    def __init__(self, site_path):
-        super(ResizeProcess, self).__init__(name='Resize')
-        self.site_path = site_path
+class ResizeProcess(BackgroundProcess):
 
     def run(self, *args):
         cmd_resize(['-d', os.path.join(self.site_path, 'static')])
@@ -70,8 +82,6 @@ class Application(tk.Frame):
 
     _cactus = None
     _resize = None
-
-    LOGGER = logging.getLogger(__file__)
 
     web_dir = os.path.join(os.path.expanduser('~'), 'crate-web')
 
@@ -83,7 +93,6 @@ class Application(tk.Frame):
         self._running = False
 
     def layout(self):
-
         self.btn_open = tk.Button(self,
                                   text='Path to Cactus site',
                                   command=self.on_select_path,
@@ -131,7 +140,7 @@ class Application(tk.Frame):
         if self._running:
             self.status.set('Stopping ...')
             self.on_stop()
-        else:
+        elif self._check_cactus_dir(self.web_dir):
             self.status.set('Starting ...')
             self.on_start()
 
@@ -139,34 +148,50 @@ class Application(tk.Frame):
         site_path = self.selected_path.get()
         # start Cactus in new thread
         if not self._cactus:
-            self.LOGGER.info('Starting Cactus server ...')
+            LOGGER.info('Starting Cactus server ...')
             self._cactus = WebserverProcess(site_path)
             self._cactus.start()
         else:
-            self.LOGGER.info('Cactus server already running.')
+            LOGGER.warn('Cactus server already running.')
         # start resize daemon in new thread
         if not self._resize:
-            self.LOGGER.info('Starting resize daemon ...')
+            LOGGER.info('Starting resize daemon ...')
             self._resize = ResizeProcess(site_path)
             self._resize.start()
         else:
-            self.LOGGER.info('Resize daemon already running.')
-        self._set_running(True)
+            LOGGER.warn('Resize daemon already running.')
+        self._wait()
+
+    def _wait(self, time_slept=0.0):
+        url = 'http://localhost:8000'
+        try:
+            req = urllib.request.Request(url=url, method='HEAD')
+            with urllib.request.urlopen(req) as resp:
+                if resp.status == 200:
+                    self._set_running(True)
+                    subprocess.Popen(['open', url])
+                    return
+        except Exception as e:
+            LOGGER.debug('Waiting for webserver ... {0:.1f}s'.format(time_slept))
+            if time_slept > 30.0:
+                self.on_stop()
+                return
+        self.after(1000, self._wait, time_slept+1.0)
 
     def on_stop(self):
         if self._cactus and self._cactus.is_alive():
-            self.LOGGER.info('Stopping Cactus server ...')
+            LOGGER.info('Stopping Cactus server ...')
             self._cactus.terminate()
-            self.LOGGER.info('Stopped')
+            LOGGER.info('Stopped')
         else:
-            self.LOGGER.info('Cactus server not running.')
+            LOGGER.info('Cactus server not running.')
         self._cactus = None
         if self._resize and self._resize.is_alive():
-            self.LOGGER.info('Stopping resize daemon ...')
+            LOGGER.info('Stopping resize daemon ...')
             self._resize.terminate()
-            self.LOGGER.info('Stopped')
+            LOGGER.info('Stopped')
         else:
-            self.LOGGER.info('Resize daemon not running.')
+            LOGGER.info('Resize daemon not running.')
         self._resize = None
         self._set_running(False)
 
@@ -175,13 +200,28 @@ class Application(tk.Frame):
         self.quit()
 
     def on_select_path(self):
-        self.web_dir = filedialog.askdirectory(**self.dir_opt)
+        new_dir = filedialog.askdirectory(**self.dir_opt)
+        if new_dir and self._check_cactus_dir(new_dir):
+            self.web_dir = new_dir
         self.selected_path.set(self.web_dir)
+        LOGGER.info('Selected site: {0}'.format(self.web_dir))
+
+    def _check_cactus_dir(self, site_path):
+        conf = os.path.join(site_path, 'config.json')
+        pages = os.path.join(site_path, 'pages')
+        if os.path.exists(conf) and \
+           os.path.isfile(conf) and \
+           os.path.exists(pages) and \
+           os.path.isdir(pages):
+            return True
+        else:
+            error_msg = '{0} is not a valid Cactus site'.format(site_path)
+            messagebox.showinfo('Warning', error_msg)
+            return False
 
 
 def build_app():
-    freeze_support()
-    set_start_method('spawn')
+    set_start_method('forkserver')
     root = tk.Tk()
     app = Application(root, title='Crate Cactus')
     app.pack(side='top', fill='both', expand=True)

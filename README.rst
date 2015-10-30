@@ -31,11 +31,41 @@ You can specify a specific port with the ``--port`` argument::
 
     $ bin/serve --port 8888
 
+Incremental Builds
+------------------
+
 You can enable support for 'incremental' builds by using the ``-i`` argument::
 
     $ bin/serve -i
 
 In this mode Cactus will only re-build files that actually changed while editing.
+
+Custom Build Path
+------------------
+
+Using the ``--path`` argument, you can specify a different site path than ``.``::
+
+    $ bin/serve --path /path/to/cactus/site
+
+
+Running GUI and building standalone executable
+==============================================
+
+Requires::
+
+    Python 3.4, Tcl/Tk + Python bindings
+
+On OSX+MacPorts install::
+
+    $ sudo port install tk +quartz py34-tkinter jpeg openjpeg webp
+
+To run the GUI::
+
+    $ bin/cactus_gui
+
+To build the executable run::
+
+    $ bin/freeze setup.py py2app
 
 
 Site Content
