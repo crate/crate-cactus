@@ -9,3 +9,5 @@ out/
 *.pyc
 *.DS_Store
 *.egg-info/
+.eggs/
+venv/

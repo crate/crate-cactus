@@ -24,7 +24,8 @@ __docformat__ = "reStructuredText"
 
 import os
 import sys
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from cx_Freeze import setup, Executable
 
 root_dir = os.path.dirname(__file__)
 
@@ -40,8 +41,30 @@ with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
 if (2, 6) == sys.version_info[:2]:
     requirements.append('argparse>=1.1')
 
+build_exe_options = {
+#    "includes": [],
+#    "packages": [],
+    "excludes": ["cx_Freeze"],
+#    "path": sys.path,
+#    "include_files": [],
+}
+
+#if (3, 0) <= sys.version_info[:2]:
+#    #requirements.append('tkinter')
+#    #build_exe_options["includes"] += ["tkinter"]
+#else:
+#    #requirements.append('Tkinter')
+#    #build_exe_options["includes"] += ["Tkinter"]
+
+from pprint import pprint
+pprint(requirements)
+
 def read(path):
     return open(os.path.join(os.path.dirname(__file__), path)).read()
+
+# GUI applications require a different base on Windows
+# (the default is for a console application).
+base = (sys.platform == "win32") and "Win32GUI" or None
 
 setup(
     name='crate-cactus',
@@ -64,4 +87,10 @@ setup(
         ]
     },
     install_requires=requirements,
+    options={
+        "build_exe": build_exe_options,
+    },
+    executables = [
+        Executable(os.path.join('src','web','gui.py'), base=base),
+    ]
 )
