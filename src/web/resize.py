@@ -55,39 +55,56 @@ class ImageProcessor():
                                                 str(size),
                                                 self.file_ext))
 
-    def resize(self):
+    def resize(self, quality):
         for size in self.sizes:
-            self._resize(size)
+            self._resize(size, quality)
 
-    def _resize(self, size):
+    def _resize(self, size, quality):
         logger.debug('Resizing image {0} to {1}px ...'.format(self.filepath, size))
         try:
             img = Image.open(self.filepath)
             # max-width, max-height
             img.thumbnail((size, size))
-            img.save(self._out_file_path(size))
+            
+            # optimize/compress images
+            optimized_ext = ['.jpg', '.jpeg', '.png']
+            if any(self.file_ext.lower() in s for s in optimized_ext):
+                img.save(self._out_file_path(size), optimize=True, quality=quality)
+            elif self.file_ext.lower() == '.gif':
+                img.save(self._out_file_path(size), save_all=True)
+            else:
+                img.save(self._out_file_path(size))
+            
         except IOError:
             logger.error("Could not convert file {0}".format(self.filepath))
 
 
 class FileHandler(RegexMatchingEventHandler):
+    
+    def __init__(self, img_quality, **kwargs):
+        super(FileHandler, self).__init__(**kwargs)
+        self.img_quality = img_quality
 
     def process(self, event):
         image = ImageProcessor(event.src_path)
-        image.resize()
+        image.resize(self.img_quality)
 
     def on_modified(self, event):
-        self.process(event)
-
+        statinfo = os.stat(event.src_path)
+        if (statinfo.st_ctime == statinfo.st_mtime):
+            self.process(event)
+        
     def on_created(self, event):
         self.process(event)
 
 
 def parse_args(args):
-    pwd = os.path.abspath(os.path.join(os.getcwd(), 'site'))
+    pwd = os.path.abspath(os.path.join(os.getcwd(), 'site', 'static'))
     parser = ArgumentParser(description='Image resize daemon')
     parser.add_argument('-d', '--dir', type=str, default=pwd,
                         help='directory to watch')
+    parser.add_argument('-q', '--img_quality', type=int, default=50,
+                        help='The image quality, on a scale from 1 (worst) to 95 (best)')
     return parser.parse_args(args)
 
 
@@ -103,7 +120,7 @@ def resize(args):
 
     ignore_regexes = [".*(_[0-9]+).(.+)"]
 
-    observer.schedule(FileHandler(regexes=regexes, ignore_regexes=ignore_regexes),
+    observer.schedule(FileHandler(_.img_quality, regexes=regexes, ignore_regexes=ignore_regexes),
                       _.dir, recursive=True)
     observer.start()
     logger.info('Watching for images in directory {0}'.format(_.dir))
