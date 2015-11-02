@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
 # vi: set encoding=utf-8
-#
+
 # Licensed to Crate (https://crate.io) under one or more contributor
 # license agreements.  See the NOTICE file distributed with this work for
 # additional information regarding copyright ownership.  Crate licenses
@@ -21,91 +21,111 @@
 # software solely pursuant to the terms of the relevant commercial agreement.
 
 import os
-from threading import Thread
+import sys
+import logging
 
-try:
-    # MacPorts Tk problem?
-    import tkFileDialog
-except ImportError:
-    pass
+# ensure Python 2 compatibility
+set_start_method = lambda x: None
 
-try:
-    # Python 2
-    from Tkinter import *
-except ImportError:
-    # Python 3
-    from tkinter import *
+if (3, 0) <= sys.version_info[:2]:
+    import tkinter as tk
+    from tkinter import filedialog
+    from multiprocessing import set_start_method
+else:
+    import Tkinter as tk
+    try:
+        from Tkinter import filedialog
+    except ImportError:
+        import tkFileDialog as filedialog
+
+from multiprocessing import Process, freeze_support
+from web.resize import resize as cmd_resize
+from cactus.cli import main as cmd_cactus
 
 
-class Application(Frame):
+class WebserverProcess(Process):
 
-    thread_cactus = None
-    thread_resize = None
-    web_dir = os.path.join(os.getcwd(), 'site')
+    def __init__(self, site_path):
+        super(WebserverProcess, self).__init__(name='Webserver')
+        self.site_path = site_path
+
+    def run(self, *args):
+        cmd_cactus(['serve',
+                    '-i',
+                    '--path', self.site_path,
+                    '--config', os.path.join(self.site_path, 'config.json')])
+
+
+class ResizeProcess(Process):
+
+    def __init__(self, site_path):
+        super(ResizeProcess, self).__init__(name='Resize')
+        self.site_path = site_path
+
+    def run(self, *args):
+        cmd_resize(['-d', os.path.join(self.site_path, 'static')])
+
+
+class Application(tk.Frame):
+
+    _cactus = None
+    _resize = None
+
+    LOGGER = logging.getLogger(__file__)
+
+    web_dir = os.path.join(os.path.expanduser('~'), 'crate-web')
 
     def __init__(self, parent, **kwargs):
         self.parent = parent
         self.parent.title(kwargs.pop('title'))
-        Frame.__init__(self, parent, **kwargs)
+        tk.Frame.__init__(self, parent, **kwargs)
         self.layout()
         self._running = False
 
     def layout(self):
 
-        self.btn_open = Button(self,
-                               text='Path to Cactus site',
-                               command=self.on_select_path,
-                               width=30)
+        self.btn_open = tk.Button(self,
+                                  text='Path to Cactus site',
+                                  command=self.on_select_path,
+                                  width=30)
         self.btn_open.grid(padx=5, row=0, column=0)
 
-        self.selected_path = StringVar()
+        self.selected_path = tk.StringVar()
         self.selected_path.set(self.web_dir)
 
-        self.entry_path = Entry(self,
-                                textvariable=self.selected_path,
-                                fg='black',
-                                width=40)
+        self.entry_path = tk.Entry(self,
+                                   textvariable=self.selected_path,
+                                   fg='black',
+                                   width=40)
         self.entry_path.grid(padx=5, row=0, column=1)
 
-        self.btn_start_stop = Button(self,
-                                     text='Start',
-                                     command=self.on_start_stop,
-                                     width=30)
+        self.btn_start_stop = tk.Button(self,
+                                        text='Start',
+                                        command=self.on_start_stop,
+                                        width=30)
         self.btn_start_stop.grid(padx=5, row=1, column=0)
 
-        self.btn_quit = Button(self,
-                               text='Quit',
-                               command=self.on_close,
-                               width=30)
+        self.btn_quit = tk.Button(self,
+                                  text='Quit',
+                                  command=self.on_close,
+                                  width=30)
         self.btn_quit.grid(padx=5, row=2, column=0)
 
         self.dir_opt = {
-            'initialdir': '.',
+            'initialdir': self.web_dir,
             'mustexist': True,
-            'parent': self.parent,
         }
 
-        self.status = StringVar()
+        self.status = tk.StringVar()
         self.status.set('Stopped')
 
-        self.status_lable = Label(self, textvariable=self.status, fg='grey')
+        self.status_lable = tk.Label(self, textvariable=self.status, fg='grey')
         self.status_lable.grid(row=1, column=1, rowspan=1)
 
     def _set_running(self, running):
         self._running = running
         self.btn_start_stop["text"] = self._running and "Stop" or "Start"
         self.status.set(self._running and 'Running ...' or 'Stopped')
-
-    def _start_cactus(self):
-        from cactus.cli import main
-        main(['serve',
-              '-i',
-              '--path', self.selected_path.get(),
-              '--config', os.path.join(self.web_dir, 'config.json')])
-
-    def _start_resize(self):
-        from web.resize import resize
-        resize(['-d', os.path.join(self.selected_path.get(), 'pages')])
 
     def on_start_stop(self):
         if self._running:
@@ -116,41 +136,38 @@ class Application(Frame):
             self.on_start()
 
     def on_start(self):
+        site_path = self.selected_path.get()
         # start Cactus in new thread
-        if not self.thread_cactus:
-            print('Starting Cactus server ...')
-            self.thread_cactus = Thread(name='Thread-Cactus',
-                                        target=self._start_cactus)
-            self.thread_cactus.daemon = True
-            self.thread_cactus.start()
+        if not self._cactus:
+            self.LOGGER.info('Starting Cactus server ...')
+            self._cactus = WebserverProcess(site_path)
+            self._cactus.start()
         else:
-            print('Cactus server already running.')
+            self.LOGGER.info('Cactus server already running.')
         # start resize daemon in new thread
-        if not self.thread_resize:
-            print('Starting resize daemon ...')
-            self.thread_resize = Thread(name='Thread-Resize',
-                                        target=self._start_resize)
-            self.thread_resize.daemon = True
-            self.thread_resize.start()
+        if not self._resize:
+            self.LOGGER.info('Starting resize daemon ...')
+            self._resize = ResizeProcess(site_path)
+            self._resize.start()
         else:
-            print('Resize daemon already running.')
+            self.LOGGER.info('Resize daemon already running.')
         self._set_running(True)
 
     def on_stop(self):
-        if self.thread_cactus and self.thread_cactus.is_alive():
-            print('Stopping Cactus server ...')
-            self.thread_cactus.join(timeout=1)
-            print('Stopped')
+        if self._cactus and self._cactus.is_alive():
+            self.LOGGER.info('Stopping Cactus server ...')
+            self._cactus.terminate()
+            self.LOGGER.info('Stopped')
         else:
-            print('Cactus server not running.')
-        self.thread_cactus = None
-        if self.thread_resize and self.thread_resize.is_alive():
-            print('Stopping resize daemon ...')
-            self.thread_resize.join(timeout=1)
-            print('Stopped')
+            self.LOGGER.info('Cactus server not running.')
+        self._cactus = None
+        if self._resize and self._resize.is_alive():
+            self.LOGGER.info('Stopping resize daemon ...')
+            self._resize.terminate()
+            self.LOGGER.info('Stopped')
         else:
-            print('Resize daemon not running.')
-        self.thread_resize = None
+            self.LOGGER.info('Resize daemon not running.')
+        self._resize = None
         self._set_running(False)
 
     def on_close(self):
@@ -158,20 +175,33 @@ class Application(Frame):
         self.quit()
 
     def on_select_path(self):
-        self.web_dir = tkFileDialog.askdirectory(**self.dir_opt)
+        self.web_dir = filedialog.askdirectory(**self.dir_opt)
         self.selected_path.set(self.web_dir)
 
-def main():
-    root = Tk()
+
+def build_app():
+    freeze_support()
+    set_start_method('spawn')
+    root = tk.Tk()
     app = Application(root, title='Crate Cactus')
     app.pack(side='top', fill='both', expand=True)
+    return root
 
+
+def main():
+    # Entry point for CLI
+    root = build_app()
     try:
         root.mainloop()
     except KeyboardInterrupt:
         root.quit()
         root.destroy()
+    finally:
         sys.exit(0)
 
+
 if __name__ == '__main__':
-    main()
+    # Entry point for app bundle
+    root = build_app()
+    root.mainloop()
+
