@@ -1,8 +1,8 @@
 [submodule "site"]
 	path = site
 	url = git@github.com:crate/crate-web.git
-	branch = restructure
+	branch = master
 [submodule "cactus"]
 	path = cactus
 	url = git@github.com:crate/Cactus.git
-	branch = v3_cherry
+	branch = v3.3.2_cherry
