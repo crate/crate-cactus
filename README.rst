@@ -11,19 +11,19 @@ to generate HTML pages.
 Development Setup
 =================
 
+System requirements:
+
+   libjpeg, zlib, libpng
+
 Clone repo and update submodules::
 
     $ git clone git@github.com:crate/crate-cactus.git
     $ cd crate-cactus
     $ git submodule update --init
 
-Make sure that libjpeg is installed:
+The dev environment requires Python >= 3.4 to be installed::
 
-    $ brew install libjpeg
-
-The dev environment requires Python 2.7 to be installed::
-
-    $ python2.7 bootstrap.py
+    $ python3.4 bootstrap.py
     $ bin/buildout -N
 
 To start the development server::
@@ -51,25 +51,20 @@ Using the ``--path`` argument, you can specify a different site path than ``.``:
 
     $ bin/serve --path /path/to/cactus/site
 
+Crate Cactus GUI/CLI
+====================
 
-Running GUI and building standalone executable
-==============================================
-
-Requires::
-
-    Python 3.4, Tcl/Tk + Python bindings
-
-On OSX+MacPorts install::
-
-    $ sudo port install tk +quartz py34-tkinter jpeg openjpeg webp
-
-To run the GUI::
+Starting the GUI requires Python with Tcl/Tk support (tkinter).
+The run::
 
     $ bin/cactus_gui
 
-To build the executable run::
+For the CLI::
 
-    $ bin/freeze setup.py py2app
+    $ bin/cactus_cli --site=/path/to/cactus-site
+
+This will start 2 processes, one for the build/webserver and one for the image
+resizing.
 
 
 Site Content

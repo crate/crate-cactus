@@ -65,7 +65,6 @@ class ImageProcessor():
             img = Image.open(self.filepath)
             # max-width, max-height
             img.thumbnail((size, size))
-            
             # optimize/compress images
             optimized_ext = ['.jpg', '.jpeg', '.png']
             if any(self.file_ext.lower() in s for s in optimized_ext):
@@ -74,13 +73,13 @@ class ImageProcessor():
                 img.save(self._out_file_path(size), save_all=True)
             else:
                 img.save(self._out_file_path(size))
-            
+
         except IOError:
             logger.error("Could not convert file {0}".format(self.filepath))
 
 
 class FileHandler(RegexMatchingEventHandler):
-    
+
     def __init__(self, img_quality, **kwargs):
         super(FileHandler, self).__init__(**kwargs)
         self.img_quality = img_quality
@@ -93,7 +92,7 @@ class FileHandler(RegexMatchingEventHandler):
         statinfo = os.stat(event.src_path)
         if (statinfo.st_ctime == statinfo.st_mtime):
             self.process(event)
-        
+
     def on_created(self, event):
         self.process(event)
 
@@ -130,8 +129,9 @@ def resize(args):
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
-
-    observer.join()
+        observer.join()
+    finally:
+        print('Exit')
 
 def main():
     resize(sys.argv[1:])

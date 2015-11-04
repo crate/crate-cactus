@@ -27,7 +27,6 @@ import os
 import sys
 from setuptools import setup, find_packages
 
-
 root_dir = os.path.dirname(__file__)
 
 requirements = [
@@ -57,43 +56,12 @@ kwargs = dict(
     namespace_packages = [],
     entry_points = {
         'console_scripts': [
-            'cactus=cactus.cli:cli_entrypoint',
             'resize_images=web.resize:main',
             'cactus_gui=web.gui:main',
+            'cactus_cli=web.cli:main',
         ]
     },
     install_requires = requirements,
 )
 
-try:
-    import py2app
-except ImportError:
-    # py2app is not present
-    # GUI cannot be built as standalone application
-    pass
-else:
-    kwargs.update(dict(
-        options = dict(
-            py2app = dict(
-                iconfile = os.path.join('resources', 'Icons.icns'),
-                plist = os.path.join('resources', 'Info.plist'),
-                # fix dynamic imports
-                packages = [
-                    'web',
-                    'cactus',
-                    'django',
-                    'django_markwhat',
-                    'keyring',
-                ],
-                argv_emulation = 1,
-            ),
-        ),
-        app = [
-            os.path.join('src','web','gui.py'),
-        ],
-    ))
-    from pprint import pprint
-    pprint(kwargs)
-
 setup(**kwargs)
-
