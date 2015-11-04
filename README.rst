@@ -17,6 +17,10 @@ Clone repo and update submodules::
     $ cd crate-cactus
     $ git submodule update --init
 
+Make sure that libjpeg is installed:
+
+    $ brew install libjpeg
+
 The dev environment requires Python 2.7 to be installed::
 
     $ python2.7 bootstrap.py
