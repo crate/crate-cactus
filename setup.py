@@ -63,7 +63,6 @@ kwargs = dict(
         ]
     },
     install_requires = requirements,
-    setup_requires = ["py2app"],
 )
 
 try:
