@@ -4,43 +4,42 @@ crate-cactus
 
 Build system for `crate.io`_ website.
 
-It uses the static website generator tool [Cactus](https://github.com/koenbok/Cactus)
-to generate HTML pages.
+It uses the static website generator tool Cactus_ to generate HTML pages.
 
 
 Development Setup
 =================
 
-System requirements:
+System requirements::
 
-   libjpeg, zlib, libpng
+    libjpeg, zlib, libpng
 
 Clone repo and update submodules::
 
-    $ git clone git@github.com:crate/crate-cactus.git
-    $ cd crate-cactus
-    $ git submodule update --init
+    git clone git@github.com:crate/crate-cactus.git
+    cd crate-cactus
+    git submodule update --init
 
 The dev environment requires Python >= 3.4 to be installed::
 
-    $ python3.4 bootstrap.py
-    $ bin/buildout -N
+    python3.4 bootstrap.py
+    bin/buildout -N
 
 To start the development server::
 
-    $ bin/serve
+    bin/serve
 
 By default Cactus serves the site on port ``8000``.
 You can specify a specific port with the ``--port`` argument::
 
-    $ bin/serve --port 8888
+    bin/serve --port 8888
 
 Incremental Builds
 ------------------
 
 You can enable support for 'incremental' builds by using the ``-i`` argument::
 
-    $ bin/serve -i
+    bin/serve -i
 
 In this mode Cactus will only re-build files that actually changed while editing.
 
@@ -49,7 +48,7 @@ Custom Build Path
 
 Using the ``--path`` argument, you can specify a different site path than ``.``::
 
-    $ bin/serve --path /path/to/cactus/site
+    bin/serve --path /path/to/cactus/site
 
 Crate Cactus GUI/CLI
 ====================
@@ -57,11 +56,11 @@ Crate Cactus GUI/CLI
 Starting the GUI requires Python with Tcl/Tk support (tkinter).
 The run::
 
-    $ bin/cactus_gui
+    bin/cactus_gui
 
 For the CLI::
 
-    $ bin/cactus_cli --site=/path/to/cactus-site
+    bin/cactus_cli --site=/path/to/cactus-site
 
 This will start 2 processes, one for the build/webserver and one for the image
 resizing.
@@ -100,6 +99,7 @@ You can build manually using ``buildout-production.cfg``::
 
 
 .. _`crate.io`: https://crate.io
+.. _`Cactus`: https://github.com/koenbok/Cactus
 .. _`crate/crate-web`: https://github.com/crate/crate-web
 .. _`deploy_web-staging`: https://jenkins.crate.io/job/deploy_web-staging/
 .. _`deploy_web-production`: https://jenkins.crate.io/job/deploy_web-production/
