@@ -44,7 +44,8 @@ HEADER_RE = r'(\w+)\:\s([\S\s]*)\n'
 
 
 def toDict(settings, posts):
-    host = settings.get('site', '')
+    host = settings.get('site', '') if settings else ''
+    _posts = posts if posts else []
     return [dict(
         id = hashlib.md5(x['url'].encode()).hexdigest(),
         title = x['title'],
@@ -55,9 +56,9 @@ def toDict(settings, posts):
         content = u'',
         excerpt = Truncator(strip_tags(markdown(force_text(x['raw_body']), safe_mode=True))).words(25),
         author = x['author'],
-    ) for x in posts]
+    ) for x in _posts]
 
-def parseDate(date_str=None):
+def parseDate(date_str=None, fallback=None):
     if date_str and re.match(r'^\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}$', date_str):
         return datetime.strptime(date_str, '%Y-%m-%dT%H:%M')
     elif date_str and re.match(r'^\d{4}\-\d{2}\-\d{2}', date_str):
@@ -65,12 +66,12 @@ def parseDate(date_str=None):
     elif date_str and re.match(r'^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}', date_str):
         return datetime.strptime(date_str, '%Y/%m/%d %H:%M:%S')
     logger.warning("Date format not correct, should be 'yyyy-mm-dd', 'yyyy-mm-ddThh:mm' or 'yyyy/mm/dd hh:mm:ss'\n{0}".format(date_str))
-    return datetime.now()
+    return datetime.now() if not fallback else fallback
 
 
 def parsePost(post):
     headers = {}
-    fn = StringIO(post.data())
+    fn = StringIO(post)
     for line in fn:
         res = re.match(HEADER_RE, line)
         if res:
@@ -80,4 +81,3 @@ def parsePost(post):
             break
     body = fn.read()
     return (headers, body)
-
