@@ -61,3 +61,8 @@ def filter_by_author(items, author):
         return []
     return list(filter(lambda x: author == x['author'], items))
 
+@register.filter(is_safe=True)
+def filter_by_topic(items, needle):
+    if not items:
+        return []
+    return list(filter(lambda x: needle in x['topics'], items))
