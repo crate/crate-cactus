@@ -1,6 +1,22 @@
 {
   "prettify": true,
   "fingerprint": [],
+  "collections": {
+    "blog": {
+      "title": "Blog",
+      "path": "blog/",
+      "template": "post.html",
+      "order": {
+        "key": "date",
+        "reverse": true
+      }
+    },
+    "articles": {
+      "title": "Articles",
+      "path": "articles/",
+      "template": "post.html"
+    }
+  },
   "settings": {
     "site": "",
     "id_segment": "qio2kmx6lv",

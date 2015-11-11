@@ -44,6 +44,7 @@ HEADER_RE = r'(\w+)\:\s([\S\s]*)\n'
 
 
 def toDict(settings, posts):
+    # TODO: improve
     host = settings.get('site', '') if settings else ''
     _posts = posts if posts else []
     return [dict(
@@ -52,6 +53,7 @@ def toDict(settings, posts):
         date = x['date'],
         tags = x['tags'],
         category = x['category'],
+        topics = x['topics'],
         permalink = '{0}{1}'.format(host, x['url']),
         content = u'',
         excerpt = Truncator(strip_tags(markdown(force_text(x['raw_body']), safe_mode=True))).words(25),

@@ -24,16 +24,19 @@
 import unittest
 from web import utils
 from datetime import datetime, date
+import django.conf
 
 class UtilsTest(unittest.TestCase):
 
+    def setUp(self):
+        django.conf.settings._wrapped = django.conf.empty
+        if not django.conf.settings.configured:
+            django.conf.settings.configure()
+
+    def tearDown(self):
+        django.conf.settings._wrapped = django.conf.empty
+
     def test_toDict(self):
-
-        from django.conf import settings
-        if not settings.configured:
-            settings.configure()
-
-
         a_post = {
             'title': 'some-title',
             'date': 'a-date',
@@ -41,15 +44,16 @@ class UtilsTest(unittest.TestCase):
             'url': '/post/1',
             'raw_body': 'short body',
             'author': 'someone',
-            'tags': 'tags,tags2'
+            'tags': ['tags', 'tags2'],
+            'topics': ['crate'],
         }
-
 
         expected_a_post = {
             "id": "4034c5bce7dad3b40247b6c812b0c93c",
             "title": "some-title",
             "date": "a-date",
-            'tags': 'tags,tags2',
+            'tags': ['tags', 'tags2'],
+            'topics': ['crate'],
             "category": "category",
             "permalink": "/post/1",
             "content": '',

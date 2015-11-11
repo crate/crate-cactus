@@ -20,7 +20,7 @@ Clone repo and update submodules::
     cd crate-cactus
     git submodule update --init
 
-The dev environment requires Python >= 3.4 to be installed::
+The dev environment requires ``Python 3 (<=3.4)`` to be installed::
 
     python3.4 bootstrap.py
     bin/buildout -N
@@ -49,6 +49,13 @@ Custom Build Path
 Using the ``--path`` argument, you can specify a different site path than ``.``::
 
     bin/serve --path /path/to/cactus/site
+
+Running Tests
+=============
+
+You can run the test suite with::
+
+    bin/test
 
 Crate Cactus GUI/CLI
 ====================

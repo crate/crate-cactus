@@ -2,6 +2,17 @@
   "prettify": true,
   "fingerprint": ["css", "js"],
   "optimize": [],
+  "collections": {
+    "blog": {
+      "title": "Blog",
+      "path": "blog/",
+      "template": "post.html",
+      "order": {
+        "key": "date",
+        "reverse": true
+      }
+    }
+  },
   "settings": {
     "site": "https://crate.io",
     "robots": true,
