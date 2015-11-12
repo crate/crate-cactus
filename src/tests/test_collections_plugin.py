@@ -78,7 +78,7 @@ class CollectionsPluginTest(unittest.TestCase):
         django.conf.settings._wrapped = django.conf.empty
 
     def test_init(self):
-        coll = Collection('Articles', 'a/', 'article.html')
+        coll = Collection('Articles', 'a/', 'article.html', self.path)
         self.assertEquals('<Articles: a/ (0 pages)>', coll.__repr__())
         self.assertEquals('Articles', coll.title)
         self.assertEquals('a/', coll.path)
@@ -91,7 +91,7 @@ class CollectionsPluginTest(unittest.TestCase):
             Page(self.site, 'blog/page-1.html'),
         ]
         for path in ['articles/', 'blog/']:
-            coll = Collection('Collection', path, 'template.html', pages=pages)
+            coll = Collection('Collection', path, 'template.html', self.path, pages=pages)
             self.assertEquals(1, len(coll.pages))
             self.assertEquals(1, len(coll))
             for page in coll.pages:
@@ -104,7 +104,7 @@ class CollectionsPluginTest(unittest.TestCase):
             Page(self.site, 'blog/page-3.html'),
         ]
         other_page = Page(self.site, 'blog/page-4.html')
-        coll = Collection('Collection', 'blog/', 'template.html', pages=pages)
+        coll = Collection('Collection', 'blog/', 'template.html', self.path, pages=pages)
         coll.sort('date', reverse=True)
 
         self.assertEquals(['blog/page-3.html', 'blog/page-2.html', 'blog/page-1.html'],
@@ -126,7 +126,7 @@ class CollectionsPluginTest(unittest.TestCase):
             Page(self.site, 'blog/page-2.html'),
             Page(self.site, 'blog/page-3.html'),
         ]
-        coll = Collection('Collection', 'blog/', 'template.html', pages=pages)
+        coll = Collection('Collection', 'blog/', 'template.html', self.path, pages=pages)
         coll.sort('date', reverse=False)
         coll.create_navigation()
 
@@ -142,10 +142,9 @@ class CollectionsPluginTest(unittest.TestCase):
             Page(self.site, 'docs/page-2.html'),
             Page(self.site, 'docs/page-3.html')
         ]
-        coll = Collection('Collection', 'docs/', 'docs.html', pages=pages)
+        coll = Collection('Collection', 'docs/', 'docs.html', self.path,  pages=pages)
         coll.sort(toc=os.path.join(self.path, 'pages', 'docs', 'toc'))
-
-        self.assertEquals(['docs/page-2.html', 'docs/page-3.html', 'docs/page-1.html'],
+        self.assertEquals(['docs/page-1.html', 'docs/page-3.html', 'docs/page-2.html'],
                           [p['path'] for p in coll.pages])
 
 
