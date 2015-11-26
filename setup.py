@@ -33,6 +33,7 @@ requirements = [
     'setuptools',
     'Pillow',
     'watchdog',
+    'pygments',
 ]
 
 with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
