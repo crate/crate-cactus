@@ -1,6 +1,6 @@
 {
   "prettify": true,
-  "fingerprint": ["css", "js"],
+  "fingerprint": [],
   "optimize": [],
   "collections": {
     "blog": {
