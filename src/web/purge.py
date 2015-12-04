@@ -38,5 +38,5 @@ if __name__ == '__main__':
     parser.add_argument('--service-key', type=str, help='Fastly Service key', default='1bUC7xOWcgbVWpBPqPqHp')
     parser.add_argument('--purge-key', type=str, help='Purge key', default='web')
     args = parser.parse_args()
-    purge(args.api_key)
+    purge(args.api_key, args.service_key, args.purge_key)
 
