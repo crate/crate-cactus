@@ -24,9 +24,9 @@ import fastly
 from argparse import ArgumentParser
 
 
-def purge(api_key):
+def purge(api_key, service_key, purge_key):
     api = fastly.connect(api_key)
-    print(api.purge_service_by_key('1bUC7xOWcgbVWpBPqPqHp', 'web'))
+    print(api.purge_service_by_key(service_key, purge_key))
 
 
 if __name__ == '__main__':
@@ -35,6 +35,8 @@ if __name__ == '__main__':
     """
     parser = ArgumentParser(description='purge fastly')
     parser.add_argument('--api-key', type=str, help='Fastly API key')
+    parser.add_argument('--service-key', type=str, help='Fastly Service key', default='1bUC7xOWcgbVWpBPqPqHp')
+    parser.add_argument('--purge-key', type=str, help='Purge key', default='web')
     args = parser.parse_args()
     purge(args.api_key)
 
