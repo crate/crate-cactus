@@ -11,6 +11,14 @@
         "key": "date",
         "reverse": true
       }
+    },
+    "doc": {
+      "title": "Doc",
+      "path": "docs/",
+      "template": "docs.html",
+      "order": {
+        "key": "date"
+      }
     }
   },
   "settings": {
