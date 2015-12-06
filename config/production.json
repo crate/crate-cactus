@@ -4,9 +4,18 @@
   "optimize": [],
   "collections": {
     "blog": {
-      "title": "Blog",
-      "path": "blog/",
+      "title": "Articles",
+      "path": "a/",
       "template": "post.html",
+      "order": {
+        "key": "date",
+        "reverse": true
+      }
+    },
+    "doc": {
+      "title": "Doc",
+      "path": "docs/",
+      "template": "docs.html",
       "order": {
         "key": "date",
         "reverse": true
