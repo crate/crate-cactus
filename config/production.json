@@ -3,7 +3,7 @@
   "fingerprint": ["css", "js"],
   "optimize": [],
   "collections": {
-    "blog": {
+    "article": {
       "title": "Articles",
       "path": "a/",
       "template": "post.html",
