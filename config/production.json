@@ -24,10 +24,13 @@
   },
   "settings": {
     "site": "https://crate.io",
+    "title": "Crate.IO",
+    "description": "Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
+    "og_image": "https://cdn.crate.io/web/1/img/crate-avatar_400x400.png",
+    "keywords": "crate database db distributed cloud docker download",
     "robots": true,
     "id_segment": "FToR4cE5lXyQziQirvt0kSnFQj0rAgu9",
     "id_facebook": "555421237941538",
-    "description": "Download Crate. Easy installation of Crate in the cloud, docker, *nix and OSX. Works with Java, Python, Ruby, PHP, Node.js, erlang, Mono, Golang, and dbext",
     "stable_version": "0.52.4",
     "stable_version_date": "December 7th, 2015",
     "testing_version": "0.54.2"
