@@ -61,6 +61,8 @@ def toDict(settings, posts):
     ) for x in _posts]
 
 def parseDate(date_str=None, fallback=None):
+    if not date_str and not fallback:
+        return datetime.now()
     if date_str and re.match(r'^\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}$', date_str):
         return datetime.strptime(date_str, '%Y-%m-%dT%H:%M')
     elif date_str and re.match(r'^\d{4}\-\d{2}\-\d{2}', date_str):
@@ -68,7 +70,7 @@ def parseDate(date_str=None, fallback=None):
     elif date_str and re.match(r'^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}', date_str):
         return datetime.strptime(date_str, '%Y/%m/%d %H:%M:%S')
     logger.warning("Date format not correct, should be 'yyyy-mm-dd', 'yyyy-mm-ddThh:mm' or 'yyyy/mm/dd hh:mm:ss'\n{0}".format(date_str))
-    return datetime.now() if not fallback else fallback
+    return fallback or datetime.now()
 
 
 def parsePost(post):
