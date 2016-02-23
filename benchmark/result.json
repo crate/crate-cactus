@@ -1,0 +1,821 @@
+[{
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.3773330094227113,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.262,
+    "timestamp": 1452996098000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.07816546552026649,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9166,
+    "timestamp": 1452996098000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.13379570247208653,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9961,
+    "timestamp": 1452996098000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.17321977369803968,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9759,
+    "timestamp": 1453082499000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.10802504339272406,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9137000000000001,
+    "timestamp": 1453082499000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.8145493784909574,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.1909,
+    "timestamp": 1453082499000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.23109573773654885,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.0404,
+    "timestamp": 1453168919000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.5014921335375063,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.1498,
+    "timestamp": 1453168919000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.3347348951035774,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9885,
+    "timestamp": 1453168919000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.15512253221244166,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.968,
+    "timestamp": 1453255324000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.10906626426168613,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9365,
+    "timestamp": 1453255324000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.7969146503861005,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.1562,
+    "timestamp": 1453255324000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.417976087832785,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2443,
+    "timestamp": 1453341713000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.019883661634618157,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8402000000000001,
+    "timestamp": 1453341713000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2740992703383145,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9213000000000005,
+    "timestamp": 1453341713000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.028861739379323622,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.882,
+    "timestamp": 1453428110000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3468057669647374,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.3464,
+    "timestamp": 1453428110000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.29583535961747776,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9542,
+    "timestamp": 1453428110000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.44939087663191374,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.3002,
+    "timestamp": 1453514535000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.1160570980164505,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9555,
+    "timestamp": 1453514535000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.26681276206358084,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9365,
+    "timestamp": 1453514535000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.01774936618586808,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8583999999999999,
+    "timestamp": 1453600904000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.2209831667797342,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9542,
+    "timestamp": 1453600904000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.8993169852727119,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.2846,
+    "timestamp": 1453600904000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.07267798841465059,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8939,
+    "timestamp": 1453687301000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3176855206017427,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2070999999999998,
+    "timestamp": 1453687301000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.27965006704809475,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.8598,
+    "timestamp": 1453687301000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.061378253477921946,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8639,
+    "timestamp": 1453773703000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.18868290860594658,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9823999999999999,
+    "timestamp": 1453773703000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.9026535104900437,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.2402,
+    "timestamp": 1453773703000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.42459567826345124,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2041,
+    "timestamp": 1453860104000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.03530283274752944,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8409,
+    "timestamp": 1453860104000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.23348252611277695,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9529,
+    "timestamp": 1453860104000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.10330033881841859,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8997999999999999,
+    "timestamp": 1454032915000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.24445508789959747,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.0011,
+    "timestamp": 1454032915000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.8488704259190563,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.255,
+    "timestamp": 1454032915000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.41022793664010737,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2368,
+    "timestamp": 1454119297000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.141254238874449,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9372,
+    "timestamp": 1454119297000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.20993389435725257,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9786,
+    "timestamp": 1454119297000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.22230296894103774,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9602999999999999,
+    "timestamp": 1454205697000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.06525097700417937,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8561,
+    "timestamp": 1454205697000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.6449352603168802,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.1211,
+    "timestamp": 1454205697000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.42700984766162,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2177,
+    "timestamp": 1454292100000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.06529502278122017,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8934,
+    "timestamp": 1454292100000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.29040628436726773,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.0537,
+    "timestamp": 1454292100000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.15407923286413402,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9512999999999999,
+    "timestamp": 1454378523000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.5225748271778886,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.4985,
+    "timestamp": 1454378523000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.26879732141522544,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.96,
+    "timestamp": 1454378523000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.17135985527538228,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.894,
+    "timestamp": 1454464918000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3479218446720471,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2772999999999999,
+    "timestamp": 1454464918000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.36428133358711645,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.028899999999999,
+    "timestamp": 1454464918000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.07686774355996163,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9075,
+    "timestamp": 1454551328000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.09750712794457651,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9214,
+    "timestamp": 1454551328000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.8480334899047307,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.197,
+    "timestamp": 1454551328000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.06799117589805347,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.944,
+    "timestamp": 1454637722000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3578192420762191,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.3137,
+    "timestamp": 1454637722000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2279845608807774,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.0722,
+    "timestamp": 1454637722000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.439833388909937,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2037,
+    "timestamp": 1454724106000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.09049220960944696,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8834,
+    "timestamp": 1454724106000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2849333957260874,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.966600000000001,
+    "timestamp": 1454724106000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.43000768597782074,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2043,
+    "timestamp": 1454810521000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.03275072518280885,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8507,
+    "timestamp": 1454810521000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2505659394251324,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9299,
+    "timestamp": 1454810521000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.03866522985836241,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.878,
+    "timestamp": 1454896917000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.1637844925504243,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9602,
+    "timestamp": 1454896917000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.8617704798842943,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.2782,
+    "timestamp": 1454896917000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.41724670160469796,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2647,
+    "timestamp": 1454983317000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.03387048862948166,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8757,
+    "timestamp": 1454983317000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.21977672761237116,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9197,
+    "timestamp": 1454983317000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.1943205856310648,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9631000000000001,
+    "timestamp": 1455069721000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.11037137310009315,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9336,
+    "timestamp": 1455069721000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.6587627797621831,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.132,
+    "timestamp": 1455069721000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.07821003771895303,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8963,
+    "timestamp": 1455156142000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.08051714103220511,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9013,
+    "timestamp": 1455156142000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 1.0007341105408558,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.2988,
+    "timestamp": 1455156142000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.3483598713973814,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.369,
+    "timestamp": 1455242498000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.02424974226667258,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8505,
+    "timestamp": 1455242498000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.27566058840538915,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9632,
+    "timestamp": 1455242498000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.10184124901040842,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9044,
+    "timestamp": 1455328897000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3400388801299054,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.0275999999999998,
+    "timestamp": 1455328897000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.7097341474101428,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.1242,
+    "timestamp": 1455328897000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.09821201555817892,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.885,
+    "timestamp": 1455415300000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.11439270081609254,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9429,
+    "timestamp": 1455415300000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.8954131392826471,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.188899999999999,
+    "timestamp": 1455415300000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.11082892221798445,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9305,
+    "timestamp": 1455501692000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.22852634421440327,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9671000000000001,
+    "timestamp": 1455501692000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.5779941262677272,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.1453,
+    "timestamp": 1455501692000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.43286584526848537,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.1945999999999999,
+    "timestamp": 1455588121000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.061467796446595,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8651,
+    "timestamp": 1455588121000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.19225410268706372,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.0644,
+    "timestamp": 1455588121000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.08365554374935351,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9505,
+    "timestamp": 1455674511000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3604836889513868,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.1690999999999998,
+    "timestamp": 1455674511000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2927488514068126,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9559,
+    "timestamp": 1455674511000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.10130256660124583,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.8867,
+    "timestamp": 1455760912000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3737526454755876,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2875999999999999,
+    "timestamp": 1455760912000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.24122522670733848,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9007,
+    "timestamp": 1455760912000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.1451807149727537,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9924,
+    "timestamp": 1455847318000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.04197380135274915,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.861,
+    "timestamp": 1455847318000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.9838914777555526,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.272399999999999,
+    "timestamp": 1455847318000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.02520714184512047,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.886,
+    "timestamp": 1455933702000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.37217463642757814,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.1392,
+    "timestamp": 1455933702000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.19338190194533442,
+    "group": "BulkInsertBenchmark",
+    "avg": 5.9828,
+    "timestamp": 1455933702000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.33100882163471057,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.1784000000000001,
+    "timestamp": 1456020103000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.3818530607445752,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.1847999999999999,
+    "timestamp": 1456020103000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2693360169008095,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.0301,
+    "timestamp": 1456020103000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.4539897465802501,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.3689,
+    "timestamp": 1456106498000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.06748303490507705,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9142,
+    "timestamp": 1456106498000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.2560847711208076,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.0563,
+    "timestamp": 1456106498000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.07024272204292795,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9114,
+    "timestamp": 1456192924000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.4661276756426291,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2777,
+    "timestamp": 1456192924000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.31360739787192754,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.045,
+    "timestamp": 1456192924000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.3566098147836092,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2002000000000002,
+    "timestamp": 1456279342000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.06280159233650082,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9074,
+    "timestamp": 1456279342000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.32158638030861475,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.016,
+    "timestamp": 1456279342000
+}, {
+    "method": "testBulkInsert",
+    "version": "0.55.0",
+    "stddev": 0.12804877976771192,
+    "group": "BulkInsertBenchmark",
+    "avg": 0.9839,
+    "timestamp": 1456365708000
+}, {
+    "method": "testBulkInsertWithBulkArgs",
+    "version": "0.55.0",
+    "stddev": 0.42826637738678436,
+    "group": "BulkInsertBenchmark",
+    "avg": 1.2669000000000001,
+    "timestamp": 1456365708000
+}, {
+    "method": "testMultipleIndexRequests",
+    "version": "0.55.0",
+    "stddev": 0.3718749252100777,
+    "group": "BulkInsertBenchmark",
+    "avg": 6.2118,
+    "timestamp": 1456365708000
+}
+]

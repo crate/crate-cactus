@@ -11,3 +11,5 @@ out/
 *.egg-info/
 .eggs/
 venv/
+.python-version
+var/run/

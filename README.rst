@@ -34,6 +34,19 @@ You can specify a specific port with the ``--port`` argument::
 
     bin/serve --port 8888
 
+Running with dev proxy
+----------------------
+
+To access benchmark api data it's required to access the cactus development
+server through the dev proxy. To run it just start::
+
+    bin/nginx
+
+The development proxy runs on port ``8001`` and the ``/benchmark/`` pages
+requires it to access api data::
+
+    open http://localhost:8001/benchmark/
+
 Incremental Builds
 ------------------
 

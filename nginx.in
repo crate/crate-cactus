@@ -1,0 +1,1 @@
+${buildout:directory}/parts/nginx/sbin/nginx -c ${buildout:directory}/etc/nginx/nginx.conf
