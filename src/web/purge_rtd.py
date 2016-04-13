@@ -2,6 +2,7 @@ import slumber
 import requests
 import argparse
 import sys
+import logging
 
 
 login_url = 'https://readthedocs.org/accounts/login/'
@@ -19,6 +20,11 @@ projects = [
 ]
 
 
+logging.basicConfig()
+logger = logging.getLogger('purge')
+logger.setLevel(logging.DEBUG)
+
+
 def rebuild_project(project_slug, session, api):
     offset = 0
     limit = 50
@@ -27,15 +33,15 @@ def rebuild_project(project_slug, session, api):
         for obj in objects:
             project_id = obj['project']['id']
             if obj.get('built', False):
-                print("Wiping: {}".format(obj['slug']))
+                logger.info("Wiping: {}".format(obj['slug']))
                 res = session.post(wipe_url.format(project_slug, obj['slug']))
                 status = res.status_code
                 if status == 200:
-                    print("Building: {}...".format(obj['slug']))
+                    logger.info("Building: {}...".format(obj['slug']))
                     res = session.post(build_url.format(project_id), data={"version_slug": obj['slug']})
                     status = res.status_code
                 if status != 200:
-                    print("An error occured while rebuilding: \n {}".format(res))
+                    logger.error("An error occured while rebuilding: \n {}".format(res))
         if len(objects) < limit:
             break
         offset += limit
@@ -56,7 +62,7 @@ def login(user, password):
 def rebuild_all(user, password):
     session, api = login(user, password)
     for project in projects:
-        print("Purge: {}\n".format(project))
+        logger.info("Purge: {}\n".format(project))
         rebuild_project(project, session, api)
 
 
