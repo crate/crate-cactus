@@ -34,6 +34,8 @@ requirements = [
     'Pillow',
     'watchdog',
     'pygments',
+    'slumber',
+    'requests'
 ]
 
 with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
