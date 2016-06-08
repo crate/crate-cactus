@@ -27,12 +27,25 @@ The dev environment requires ``Python 3 (<=3.4)`` to be installed::
 
 To start the development server::
 
-    bin/serve
+    bin/cactus serve --path site
 
 By default Cactus serves the site on port ``8000``.
 You can specify a specific port with the ``--port`` argument::
 
-    bin/serve --port 8888
+    bin/cactus serve --port 8888 --path site
+
+Serving Crate.IO website
+------------------------
+
+To serve the website locally you need to check out the ``crate-web`` repo
+into a sepeatete folder and then run::
+
+    bin/cactus serve --path /path/to/crate-web
+
+To build the website you also need to specify the path to the production
+configuration file::
+
+    bin/cactus build --path /path/to/crate-web --config /path/to/crate-web/config/production.json
 
 Running with dev proxy
 ----------------------
