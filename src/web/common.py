@@ -21,11 +21,9 @@
 # software solely pursuant to the terms of the relevant commercial agreement.
 
 import os
-import sys
 import time
 import logging
-
-from urllib import request
+import requests
 from multiprocessing import Process
 
 from cactus.cli import main as cmd_cactus
@@ -99,16 +97,15 @@ class Application(object):
                 break
 
     def _wait_for_server(self):
-        url = 'http://localhost:8000'
         try:
-            req = request.Request(url=url, method='HEAD')
-            with request.urlopen(req) as resp:
-                if resp.status == 200:
-                    self._set_running(True)
-                    return True
+            resp = requests.head(url='http://localhost:8000/robots.txt')
         except Exception as e:
             LOGGER.debug('Waiting for webserver ...')
-        return False
+            return False
+        else:
+            running = resp.status_code == 200
+            self._set_running(running)
+            return running
 
     def on_stop(self):
         if self._cactus and self._cactus.is_alive():
@@ -145,5 +142,4 @@ class Application(object):
         else:
             self.on_stop()
             return [1, 1]
-
 
