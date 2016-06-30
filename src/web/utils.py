@@ -27,7 +27,7 @@ import hashlib
 import logging
 
 try:
-    from StringIO import StringIO
+    from cStringIO import StringIO
 except ImportError:
     # python 3
     from io import StringIO
@@ -60,6 +60,7 @@ def toDict(settings, posts):
         author = x['author'],
     ) for x in _posts]
 
+
 def parseDate(date_str=None, fallback=None):
     if not date_str and not fallback:
         return datetime.now()
@@ -74,6 +75,7 @@ def parseDate(date_str=None, fallback=None):
 
 
 def parsePost(post):
+    assert isinstance(post, str) or isinstance(post, unicode), "Post body must be of type str/unicode"
     headers = {}
     fn = StringIO(post)
     for line in fn:
