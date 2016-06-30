@@ -62,7 +62,6 @@ kwargs = dict(
     entry_points = {
         'console_scripts': [
             'resize_images=web.resize:main',
-            'cactus_gui=web.gui:main',
             'cactus_cli=web.cli:main',
             'deploytools=web.deploy:main',
         ]
