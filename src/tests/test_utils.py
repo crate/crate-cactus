@@ -99,15 +99,14 @@ class UtilsTest(unittest.TestCase):
         self.assertIs(utils.parseDate(None, fallback = fb), fb)
         self.assertIs(utils.parseDate(fallback = fb), fb)
 
-        date_only =  datetime(1234, 1, 22)
-        dt_no_secs = datetime(1234, 1, 22, 13, 33)
-        full_dt = datetime(1234, 1, 22, 13, 33, 37)
+        date_only =  datetime(2016, 1, 22)
+        dt_no_secs = datetime(2016, 1, 22, 13, 33)
+        full_dt = datetime(2016, 1, 22, 13, 33, 37)
 
         # proper formatting
         self.assertEqual(utils.parseDate("{:%Y-%m-%d}".format(date_only)), date_only)
         self.assertEqual(utils.parseDate("{:%Y/%m/%d %H:%M:%S}".format(full_dt)), full_dt)
         self.assertEqual(utils.parseDate("{:%Y-%m-%dT%H:%M}".format(dt_no_secs)), dt_no_secs)
-
 
         # fallback is only used as a fallback
         self.assertIsNot(utils.parseDate("{:%Y-%m-%d}".format(date_only), fallback = fb), fb)
@@ -126,15 +125,19 @@ class UtilsTest(unittest.TestCase):
 
     def test_parsePost(self):
 
-        with self.assertRaises(TypeError):
+        with self.assertRaises(AssertionError):
             utils.parsePost({})
             utils.parsePost(None)
 
         body = "this is an article about testing"
-        self.assertIsInstance(utils.parsePost("post"), type(()))
+        self.assertIsInstance(utils.parsePost("post"),
+                              type(()))
 
-        self.assertEqual(utils.parsePost("""hello: world\n\n{}""".format(body)), ({"hello": "world"}, body))
+        self.assertEqual(utils.parsePost("""hello: world\n\n{}""".format(body)),
+                         ({"hello": "world"}, body))
 
-        self.assertEqual(utils.parsePost("""hello: world\n{}""".format(body)), ({"hello": "world"}, ''))
+        self.assertEqual(utils.parsePost("""hello: world\n{}""".format(body)),
+                         ({"hello": "world"}, ''))
 
-        self.assertEqual(utils.parsePost("""\n{}\nhello:world""".format(body)), ({}, 'this is an article about testing\nhello:world'))
+        self.assertEqual(utils.parsePost("""\n{}\nhello:world""".format(body)),
+                         ({}, body+'\nhello:world'))

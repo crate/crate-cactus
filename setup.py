@@ -35,7 +35,9 @@ requirements = [
     'watchdog',
     'pygments',
     'slumber',
-    'requests'
+    'requests',
+    'cdn-fastly',
+    'httplib2',
 ]
 
 with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
@@ -60,8 +62,8 @@ kwargs = dict(
     entry_points = {
         'console_scripts': [
             'resize_images=web.resize:main',
-            'cactus_gui=web.gui:main',
             'cactus_cli=web.cli:main',
+            'deploytools=web.deploy:main',
         ]
     },
     install_requires = requirements,
