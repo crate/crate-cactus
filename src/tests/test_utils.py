@@ -129,15 +129,15 @@ class UtilsTest(unittest.TestCase):
             utils.parsePost({})
             utils.parsePost(None)
 
-        body = "this is an article about testing"
-        self.assertIsInstance(utils.parsePost("post"),
+        body = u"this is an article about testing"
+        self.assertIsInstance(utils.parsePost(u"post"),
                               type(()))
 
-        self.assertEqual(utils.parsePost("""hello: world\n\n{}""".format(body)),
+        self.assertEqual(utils.parsePost(u"""hello: world\n\n{}""".format(body)),
                          ({"hello": "world"}, body))
 
-        self.assertEqual(utils.parsePost("""hello: world\n{}""".format(body)),
+        self.assertEqual(utils.parsePost(u"""hello: world\n{}""".format(body)),
                          ({"hello": "world"}, ''))
 
-        self.assertEqual(utils.parsePost("""\n{}\nhello:world""".format(body)),
+        self.assertEqual(utils.parsePost(u"""\n{}\nhello:world""".format(body)),
                          ({}, body+'\nhello:world'))
