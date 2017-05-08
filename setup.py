@@ -31,13 +31,7 @@ root_dir = os.path.dirname(__file__)
 
 requirements = [
     'setuptools',
-    'Pillow',
-    'watchdog',
     'pygments',
-    'slumber',
-    'requests',
-    'cdn-fastly',
-    'httplib2',
 ]
 
 with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
@@ -53,7 +47,7 @@ kwargs = dict(
     author = 'CRATE Technology GmbH',
     author_email = 'office@crate.io',
     package_dir = {'': 'src', 'cactus': 'cactus/cactus'},
-    description = 'Cactus Website Deploy Tool',
+    description = 'Cactus Website Tooling',
     long_description = read('README.rst'),
     platforms = ['any'],
     license = 'Apache License 2.0',
@@ -61,9 +55,6 @@ kwargs = dict(
     namespace_packages = [],
     entry_points = {
         'console_scripts': [
-            'resize_images=web.resize:main',
-            'cactus_cli=web.cli:main',
-            'deploytools=web.deploy:main',
         ]
     },
     install_requires = requirements,
