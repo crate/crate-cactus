@@ -32,6 +32,8 @@ root_dir = os.path.dirname(__file__)
 requirements = [
     'setuptools',
     'pygments',
+    'cdn-fastly',
+    'httplib2',
 ]
 
 with open(os.path.join(root_dir, 'cactus', 'requirements.txt')) as fp:
@@ -55,6 +57,7 @@ kwargs = dict(
     namespace_packages = [],
     entry_points = {
         'console_scripts': [
+            'deploytools=web.deploy:main',
         ]
     },
     install_requires = requirements,
